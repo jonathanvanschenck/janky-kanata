@@ -1,0 +1,11 @@
+[Unit]
+Description=Kanata Service
+
+[Service]
+ExecStartPre=/sbin/modprobe uinput
+ExecStart=/home/jonathan/.local/bin/kanata -c /home/jonathan/.config/kanata/init.kbd
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

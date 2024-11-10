@@ -1,0 +1,88 @@
+(defcfg
+    danger-enable-cmd yes
+
+    process-unmapped-keys yes
+
+    concurrent-tap-hold yes
+
+    ;; Turn on for debugging
+    ;; log-layer-changes yes
+    log-layer-changes no
+)
+
+(defsrc
+  ;; grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  ;; tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  ;; caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  ;; lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  ;; lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defvar
+  tapTimeout   200
+  holdTimeout  200
+)
+
+(defalias 
+    sshCopy (cmd bash -c "xclip -selection clipboard -i <(cat ~/.ssh/id_rsa.pub | tr -d '\n' )")
+    tokCopy (cmd bash -c "xclip -selection clipboard -i < ~/.ssh/token.txt")
+)
+
+(defchordsv2-experimental
+  (lmet s) @sshCopy   500 all-released ()
+  (lmet t) @tokCopy   500 all-released ()
+)
+
+
+(deflayermap (base)
+    ;; Must hold caps to actually toggle caps, otherwise esc
+    caps (tap-hold $tapTimeout $holdTimeout esc (caps-word 2000))
+
+    ;; Hold the a key for a layer modifier
+    g (tap-hold $tapTimeout $holdTimeout g (layer-while-held vimlike))
+    f (tap-hold $tapTimeout $holdTimeout f rctl)
+    d (tap-hold $tapTimeout $holdTimeout d rsft)
+    s (tap-hold $tapTimeout $holdTimeout s rmet)
+    a (tap-hold $tapTimeout $holdTimeout a ralt)
+
+    h (tap-hold $tapTimeout $holdTimeout h (layer-while-held vimlike))
+    j (tap-hold $tapTimeout $holdTimeout j rctl)
+    k (tap-hold $tapTimeout $holdTimeout k rsft)
+    l (tap-hold $tapTimeout $holdTimeout l rmet)
+    ; (tap-hold $tapTimeout $holdTimeout ; ralt)
+)
+
+(deflayermap (vimlike)
+
+
+    f (tap-hold $tapTimeout $holdTimeout f rctl)
+    ;; d (tap-hold $tapTimeout $holdTimeout d rsft) ;; see below
+    s (tap-hold $tapTimeout $holdTimeout s rmet)
+    a (tap-hold $tapTimeout $holdTimeout a ralt)
+
+    ;; j (tap-hold $tapTimeout $holdTimeout j rctl) ;; see below
+    ;; k (tap-hold $tapTimeout $holdTimeout k rsft) ;; see below
+    ;; l (tap-hold $tapTimeout $holdTimeout l rmet) ;; see below
+    ; (tap-hold $tapTimeout $holdTimeout ; ralt)
+
+    ;; Base vim motions
+    h left
+    j (tap-hold $tapTimeout $holdTimeout down rctl)
+    k (tap-hold $tapTimeout $holdTimeout up rsft)
+    l (tap-hold $tapTimeout $holdTimeout right rmet)
+    bspc left
+    spc right
+    b C-left
+    w C-right
+
+    ;; Control motions
+    d (tap-hold $tapTimeout $holdTimeout pgdn rsft)
+    u pgup
+    e (mwheel-down 50 120)
+    y (mwheel-up 50 120)
+
+    ;; Shift motions
+    4 end
+    6 home
+)
+
