@@ -3,7 +3,7 @@ Description=Kanata Service
 
 [Service]
 ExecStartPre=/sbin/modprobe uinput
-ExecStart=/home/jonathan/.local/bin/kanata -c /home/jonathan/.config/kanata/init.kbd
+ExecStart=/path/to/.local/bin/kanata -c /path/to/.config/kanata/init.kbd
 Restart=always
 
 [Install]
