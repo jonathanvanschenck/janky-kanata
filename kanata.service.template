@@ -7,5 +7,5 @@ ExecStart=/path/to/.local/bin/kanata -c /path/to/.config/kanata/init.kbd
 Restart=always
 
 [Install]
-WantedBy=multi-user.target
+WantedBy=default.target
 
