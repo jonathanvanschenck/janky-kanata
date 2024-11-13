@@ -19,8 +19,8 @@
 )
 
 (defvar
-  tapTimeout   200
-  holdTimeout  200
+  tapTimeout   250
+  holdTimeout  250
 )
 
 (defalias 
