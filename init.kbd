@@ -19,8 +19,8 @@
 )
 
 (defvar
-  tapTimeout   250
-  holdTimeout  250
+  tapTimeout   250 ;; window after a tap where if you press again, it will hold the tap action (i.e. tap+press = repeated taps while held)
+  holdTimeout  250 ;; press duration which (if terminated) will be a 'tap'
 )
 
 (defalias 
@@ -29,8 +29,9 @@
 )
 
 (defchordsv2-experimental
-  (lmet s) @sshCopy   500 all-released ()
-  (lmet t) @tokCopy   500 all-released ()
+  ;; (lmet s) @sshCopy   500 all-released ()
+  ;; (j k ; c) @tokCopy   500 all-released () ;; looks like ctrl+shift+alt+c
+  ;; (f d a c) @tokCopy   500 all-released () ;; looks like ctrl+shift+alt+c
 )
 
 
@@ -70,7 +71,7 @@
     j (tap-hold $tapTimeout $holdTimeout down rctl)
     k (tap-hold $tapTimeout $holdTimeout up rsft)
     l (tap-hold $tapTimeout $holdTimeout right rmet)
-    bspc left
+    ;; bspc left ;; <== wow this is one irritating
     spc right
     b C-left
     w C-right
