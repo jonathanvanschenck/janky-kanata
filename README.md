@@ -2,9 +2,23 @@
 A kanata configuration file set for awesome keyboard rebindings!
 
 ## Installation
-Ya know... Just install it for root, it'll make your life better.
 
-Next you need to download the kanata binary:
+Run the provided install script — it handles everything interactively:
+
+```bash
+bash install.sh
+```
+
+The script will:
+1. Fetch the latest kanata release from GitHub.
+2. Check whether the binary is installed (in `~/.local/bin/kanata` or `$PATH`) and offer to download or upgrade it.
+3. Detect any existing system or user service and, if none is found, prompt you to set one up.
+
+### Manual installation
+
+If you prefer to do it yourself:
+
+Download the kanata binary:
 ```bash
 VERSION=1.8.1
 URL="https://github.com/jtroo/kanata/releases/download/v$VERSION/kanata_cmd_allowed"
